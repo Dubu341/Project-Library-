@@ -8,3 +8,6 @@
   width: 600px;
   justify-self: center;
 }
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}

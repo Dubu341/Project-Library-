@@ -8,8 +8,20 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <div class="card-container">
-        
-    </div>
+    <dialog>
+      <p>This dialog was opened using an invoker command.</p>
+      <button>Close</button>
+      <button class="confirm" form="bookForm">Add</button>
+      <form action="" method="dialog" id="bookForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required />
+        <label for="pages">Number of pages:</label>
+        <input type="number" name="pages" id="pages" required />
+      </form>
+    </dialog>
+    <button type="submit">Add a book</button>
+    <div class="card-container"></div>
   </body>
 </html>

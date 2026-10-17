@@ -1,10 +1,51 @@
-const myLibrary = [];
+const myLibrary = [
+  {
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    pages: "180 pages",
+    id: crypto.randomUUID(),
+  },
+  {
+    title: "Pride and Prejudice",
+    author: "Jane Austen",
+    pages: "384 pages",
+    id: crypto.randomUUID(),
+  },
+  {
+    title: "A Tale of Two Cities",
+    author: " Charles Dickens",
+    pages: "416 pages",
+    id: crypto.randomUUID(),
+  },
+];
 const container = document.querySelector(".card-container");
-let title = "test";
-let author = "test";
-let pages = "test";
+const dialog = document.querySelector("dialog");
+const addBookBtn = document.querySelector("dialog + button");
+const closeBtn = document.querySelector("dialog button");
+const form = document.querySelector("form");
+
+addBookBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeBtn.addEventListener("click", () => {
+  dialog.close();
+});
+
+form.addEventListener("submit", (event) => {
+  //add new book to myLibrary array
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const formValues = Object.fromEntries(formData);
+  const newBook = new Book(formValues);
+  myLibrary.push(newBook);
+  displayBook();
+  form.reset();
+  dialog.close();
+});
+
 class Book {
-  constructor(title, author, pages) {
+  constructor({ title, author, pages }) {
     if (!new.target) {
       throw Error("You must use the 'new' operator to call the constructor");
     }
@@ -18,18 +59,8 @@ class Book {
   }
 }
 
-function addBookToLibrary() {
-  ((myLibrary.push(new Book(title, author, pages)),
-  myLibrary.push(
-    new Book("The Great Gatsby", "F. Scott Fitzgerald", "180 pages"),
-  )),
-    myLibrary.push(new Book("Pride and Prejudice", "Jane Austen", "384 pages")),
-    myLibrary.push(
-      new Book("A Tale of Two Cities", " Charles Dickens", "416 pages"),
-    ));
-  displayBook();
-}
 function displayBook() {
+  container.innerHTML = "";
   myLibrary.forEach((book) => {
     const content = document.createElement("div");
     content.classList.add("card");
@@ -37,4 +68,4 @@ function displayBook() {
     container.appendChild(content);
   });
 }
-addBookToLibrary();
+displayBook();
