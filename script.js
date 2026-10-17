@@ -29,3 +29,12 @@ function addBookToLibrary() {
     ));
   displayBook();
 }
+function displayBook() {
+  myLibrary.forEach((book) => {
+    const content = document.createElement("div");
+    content.classList.add("card");
+    content.textContent = `Title: ${book.title}, Author:${book.author}, Pages: ${book.pages}`;
+    container.appendChild(content);
+  });
+}
+addBookToLibrary();
