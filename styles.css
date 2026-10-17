@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+}
+.card-container {
+  border: 1px solid black;
+  display: grid;
+  height: 400px;
+  width: 400px;
+  justify-self: center;
+}
