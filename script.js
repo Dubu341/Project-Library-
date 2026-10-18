@@ -4,18 +4,21 @@ const myLibrary = [
     author: "F. Scott Fitzgerald",
     pages: "180 pages",
     id: crypto.randomUUID(),
+    read: false,
   },
   {
     title: "Pride and Prejudice",
     author: "Jane Austen",
     pages: "384 pages",
     id: crypto.randomUUID(),
+    read: false,
   },
   {
     title: "A Tale of Two Cities",
     author: "Charles Dickens",
     pages: "416 pages",
     id: crypto.randomUUID(),
+    read: true,
   },
 ];
 const container = document.querySelector(".card-container");
@@ -36,11 +39,9 @@ form.addEventListener("submit", (event) => {
   //add new book to myLibrary array
   event.preventDefault();
   const formData = new FormData(event.target);
-
-  formData.set("read", checkbox.checked);
+  formData.set("read", checkbox.checked); //sets the checkbox value to either true or false
   const formValues = Object.fromEntries(formData);
   const newBook = new Book(formValues);
-
   myLibrary.push(newBook);
   displayBook();
   form.reset();
@@ -73,14 +74,17 @@ function displayBook() {
     removeBook.classList.add("removeButton");
     const readBook = document.createElement("button");
     readBook.classList.add("readButton");
+    const isRead = document.createElement("p");
     title.textContent = `Title: ${book.title}`;
-    author.textContent = `Author:${book.author}`;
+    author.textContent = `Author: ${book.author}`;
     pages.textContent = `Pages: ${book.pages}`;
+    isRead.textContent = book.read ? "Read: Yes" : "Read: No";
     removeBook.textContent = "Remove";
     readBook.textContent = "Read";
     bookContainer.appendChild(title);
     bookContainer.appendChild(author);
     bookContainer.appendChild(pages);
+    bookContainer.appendChild(isRead);
     buttonContainer.appendChild(removeBook);
     buttonContainer.appendChild(readBook);
     container.appendChild(bookContainer);
