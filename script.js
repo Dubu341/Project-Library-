@@ -23,7 +23,7 @@ const dialog = document.querySelector("dialog");
 const addBookBtn = document.querySelector(".addBookBtn");
 const closeBtn = document.querySelector(".closeBtn");
 const form = document.querySelector("form");
-
+const checkbox = document.querySelector(".checkbox");
 addBookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
@@ -36,8 +36,11 @@ form.addEventListener("submit", (event) => {
   //add new book to myLibrary array
   event.preventDefault();
   const formData = new FormData(event.target);
+
+  formData.set("read", checkbox.checked);
   const formValues = Object.fromEntries(formData);
   const newBook = new Book(formValues);
+
   myLibrary.push(newBook);
   displayBook();
   form.reset();
@@ -45,7 +48,7 @@ form.addEventListener("submit", (event) => {
 });
 
 class Book {
-  constructor({ title, author, pages }) {
+  constructor({ title, author, pages, read = false }) {
     if (!new.target) {
       throw Error("You must use the 'new' operator to call the constructor");
     }
@@ -53,12 +56,9 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.id = crypto.randomUUID();
-    this.info = function () {
-      return `Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}`;
-    };
+    this.read = read;
   }
 }
-
 function displayBook() {
   container.innerHTML = "";
   myLibrary.forEach((book) => {
