@@ -21,7 +21,7 @@ const myLibrary = [
 const container = document.querySelector(".card-container");
 const dialog = document.querySelector("dialog");
 const addBookBtn = document.querySelector(".addBookBtn");
-const closeBtn = document.querySelector("dialog button");
+const closeBtn = document.querySelector(".closeBtn");
 const form = document.querySelector("form");
 
 addBookBtn.addEventListener("click", () => {

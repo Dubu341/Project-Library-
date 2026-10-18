@@ -9,16 +9,25 @@
   </head>
   <body>
     <dialog>
-      <button>Close</button>
-      <button class="confirm" form="bookForm">Add</button>
       <form action="" method="dialog" id="bookForm">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" autofocus required />
         <label for="author">Author:</label>
         <input type="text" id="author" name="author" required />
         <label for="pages">Number of pages:</label>
-        <input type="number" name="pages" id="pages" required />
+        <input
+          type="number"
+          min="1"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+          name="pages"
+          id="pages"
+          required
+        />
       </form>
+      <div class="dialogBtns">
+        <button class="closeBtn">Close</button>
+        <button class="confirm" form="bookForm">Add</button>
+      </div>
     </dialog>
 
     <div class="container">
