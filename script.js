@@ -13,14 +13,14 @@ const myLibrary = [
   },
   {
     title: "A Tale of Two Cities",
-    author: " Charles Dickens",
+    author: "Charles Dickens",
     pages: "416 pages",
     id: crypto.randomUUID(),
   },
 ];
 const container = document.querySelector(".card-container");
 const dialog = document.querySelector("dialog");
-const addBookBtn = document.querySelector("dialog + button");
+const addBookBtn = document.querySelector(".addBookBtn");
 const closeBtn = document.querySelector("dialog button");
 const form = document.querySelector("form");
 
@@ -54,7 +54,7 @@ class Book {
     this.pages = pages;
     this.id = crypto.randomUUID();
     this.info = function () {
-      return `Title:${this.title}, Author: ${this.author}, Pages: ${this.pages}`;
+      return `Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}`;
     };
   }
 }
@@ -62,10 +62,29 @@ class Book {
 function displayBook() {
   container.innerHTML = "";
   myLibrary.forEach((book) => {
-    const content = document.createElement("div");
-    content.classList.add("card");
-    content.textContent = `Title: ${book.title}, Author:${book.author}, Pages: ${book.pages}`;
-    container.appendChild(content);
+    const bookContainer = document.createElement("div");
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("buttonContainer");
+    bookContainer.classList.add("bookContainer");
+    const title = document.createElement("p");
+    const author = document.createElement("p");
+    const pages = document.createElement("p");
+    const removeBook = document.createElement("button");
+    removeBook.classList.add("removeButton");
+    const readBook = document.createElement("button");
+    readBook.classList.add("readButton");
+    title.textContent = `Title: ${book.title}`;
+    author.textContent = `Author:${book.author}`;
+    pages.textContent = `Pages: ${book.pages}`;
+    removeBook.textContent = "Remove";
+    readBook.textContent = "Read";
+    bookContainer.appendChild(title);
+    bookContainer.appendChild(author);
+    bookContainer.appendChild(pages);
+    buttonContainer.appendChild(removeBook);
+    buttonContainer.appendChild(readBook);
+    container.appendChild(bookContainer);
+    bookContainer.appendChild(buttonContainer);
   });
 }
 displayBook();
