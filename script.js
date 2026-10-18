@@ -80,14 +80,16 @@ function displayBook() {
     const pages = document.createElement("p");
     const isRead = document.createElement("p");
     const removeBook = document.createElement("button");
-    const readBook = document.createElement("button");
+
+    const readBook = document.createElement("input");
+    readBook.type = "checkbox";
+  
 
     title.textContent = `Title: ${book.title}`;
     author.textContent = `Author: ${book.author}`;
     pages.textContent = `Pages: ${book.pages}`;
     isRead.textContent = book.read ? "Read: Yes" : "Read: No";
     removeBook.textContent = "Remove";
-    readBook.textContent = "Read";
 
     bookContainer.setAttribute("data-id", book.id); //stamp book id into its container
 
@@ -104,17 +106,18 @@ function displayBook() {
       displayBook();
     });
 
-    readBook.classList.add("readButton");
+    readBook.classList.add("checkbox");
     removeBook.classList.add("removeButton");
     buttonContainer.classList.add("buttonContainer");
     bookContainer.classList.add("bookContainer");
+    isRead.classList.add("isRead");
 
     bookContainer.appendChild(title);
     bookContainer.appendChild(author);
     bookContainer.appendChild(pages);
     bookContainer.appendChild(isRead);
     buttonContainer.appendChild(removeBook);
-    buttonContainer.appendChild(readBook);
+    isRead.appendChild(readBook);
     container.appendChild(bookContainer);
     bookContainer.appendChild(buttonContainer);
   });

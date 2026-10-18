@@ -150,3 +150,77 @@ dialog > .dialogBtns {
   gap: 5px;
   grid-template-columns: 100px 100px;
 }
+.bookContainer > .isRead {
+  display: grid;
+  grid-template-columns: 100px 50px;
+}
+.bookContainer input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  margin-top: 6px;
+  display: grid;
+  place-content: center;
+}
+.bookContainer input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(1);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  background-color: CanvasText;
+  transform-origin: bottom left;
+}
+.bookContainer input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
+dialog input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid #555;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+
+  display: inline-grid;
+  place-content: center;
+  vertical-align: middle;
+}
+
+/* Create the checkmark indicator */
+dialog input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: #fff;
+
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+dialog input[type="checkbox"]:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+dialog input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
