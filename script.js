@@ -89,11 +89,18 @@ function displayBook() {
     removeBook.textContent = "Remove";
     readBook.textContent = "Read";
 
-    bookContainer.setAttribute("data-id", book.id);
+    bookContainer.setAttribute("data-id", book.id); //stamp book id into its container
 
     removeBook.addEventListener("click", () => {
       let bookId = bookContainer.getAttribute("data-id");
-      myLibrary = myLibrary.filter((item) => item.id != bookId);
+      myLibrary = myLibrary.filter((item) => item.id != bookId); //creates a new array with every item that doesnt equal the id which then assigned back to the same array
+      displayBook();
+    });
+
+    readBook.addEventListener("click", () => {
+      let bookId = bookContainer.getAttribute("data-id");
+      let index = myLibrary.findIndex((item) => item.id == bookId);
+      myLibrary[index].changeRead();
       displayBook();
     });
 
