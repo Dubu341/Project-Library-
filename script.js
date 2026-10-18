@@ -5,7 +5,6 @@ const addBookBtn = document.querySelector(".addBookBtn");
 const closeBtn = document.querySelector(".closeBtn");
 const form = document.querySelector("form");
 const checkbox = document.querySelector(".checkbox");
-// const removeButton = document.querySelector(".removeButton");
 
 addBookBtn.addEventListener("click", () => {
   dialog.showModal();
