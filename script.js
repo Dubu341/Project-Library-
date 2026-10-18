@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 const container = document.querySelector(".card-container");
 const dialog = document.querySelector("dialog");
 const addBookBtn = document.querySelector(".addBookBtn");
@@ -6,7 +6,7 @@ const closeBtn = document.querySelector(".closeBtn");
 const form = document.querySelector("form");
 const checkbox = document.querySelector(".checkbox");
 // const removeButton = document.querySelector(".removeButton");
-const readButton = document.querySelector(".readButton");
+
 addBookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
@@ -40,7 +40,9 @@ class Book {
     this.read = read;
   }
 }
-
+Book.prototype.changeRead = function () {
+  this.read = !this.read;
+};
 function addBookToLibrary() {
   myLibrary.push(
     new Book({
@@ -73,22 +75,33 @@ function displayBook() {
   myLibrary.forEach((book) => {
     const bookContainer = document.createElement("div");
     const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("buttonContainer");
-    bookContainer.classList.add("bookContainer");
     const title = document.createElement("p");
     const author = document.createElement("p");
     const pages = document.createElement("p");
-    const removeBook = document.createElement("button");
-    removeBook.classList.add("removeButton");
-    const readBook = document.createElement("button");
-    readBook.classList.add("readButton");
     const isRead = document.createElement("p");
+    const removeBook = document.createElement("button");
+    const readBook = document.createElement("button");
+
     title.textContent = `Title: ${book.title}`;
     author.textContent = `Author: ${book.author}`;
     pages.textContent = `Pages: ${book.pages}`;
     isRead.textContent = book.read ? "Read: Yes" : "Read: No";
     removeBook.textContent = "Remove";
     readBook.textContent = "Read";
+
+    bookContainer.setAttribute("data-id", book.id);
+
+    removeBook.addEventListener("click", () => {
+      let bookId = bookContainer.getAttribute("data-id");
+      myLibrary = myLibrary.filter((item) => item.id != bookId);
+      displayBook();
+    });
+
+    readBook.classList.add("readButton");
+    removeBook.classList.add("removeButton");
+    buttonContainer.classList.add("buttonContainer");
+    bookContainer.classList.add("bookContainer");
+
     bookContainer.appendChild(title);
     bookContainer.appendChild(author);
     bookContainer.appendChild(pages);
