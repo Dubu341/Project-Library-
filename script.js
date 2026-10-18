@@ -1,32 +1,12 @@
-const myLibrary = [
-  {
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    pages: "180 pages",
-    id: crypto.randomUUID(),
-    read: false,
-  },
-  {
-    title: "Pride and Prejudice",
-    author: "Jane Austen",
-    pages: "384 pages",
-    id: crypto.randomUUID(),
-    read: false,
-  },
-  {
-    title: "A Tale of Two Cities",
-    author: "Charles Dickens",
-    pages: "416 pages",
-    id: crypto.randomUUID(),
-    read: true,
-  },
-];
+const myLibrary = [];
 const container = document.querySelector(".card-container");
 const dialog = document.querySelector("dialog");
 const addBookBtn = document.querySelector(".addBookBtn");
 const closeBtn = document.querySelector(".closeBtn");
 const form = document.querySelector("form");
 const checkbox = document.querySelector(".checkbox");
+// const removeButton = document.querySelector(".removeButton");
+const readButton = document.querySelector(".readButton");
 addBookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
@@ -60,6 +40,34 @@ class Book {
     this.read = read;
   }
 }
+
+function addBookToLibrary() {
+  myLibrary.push(
+    new Book({
+      title: "The Great Gatsby",
+      author: "F. Scott Fitzgerald",
+      pages: "180 pages",
+      read: true,
+    }),
+  );
+  myLibrary.push(
+    new Book({
+      title: "Pride and Prejudice",
+      author: "Jane Austen",
+      pages: "384 pages",
+      read: false,
+    }),
+  );
+  myLibrary.push(
+    new Book({
+      title: "A Tale of Two Cities",
+      author: "Charles Dickens",
+      pages: "416 pages",
+      read: false,
+    }),
+  );
+}
+addBookToLibrary();
 function displayBook() {
   container.innerHTML = "";
   myLibrary.forEach((book) => {
