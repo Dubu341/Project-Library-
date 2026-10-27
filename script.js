@@ -29,20 +29,17 @@ form.addEventListener("submit", (event) => {
 
 class Book {
   constructor({ title, author, pages, read = false }) {
-    if (!new.target) {
-      throw Error("You must use the 'new' operator to call the constructor");
-    }
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.id = crypto.randomUUID();
     this.read = read;
   }
+  changeRead() {
+    this.read = !this.read;
+  }
 }
-Book.prototype.changeRead = function () {
-  this.read = !this.read;
-};
-function addBookToLibrary() {
+(function addBookToLibrary() {
   myLibrary.push(
     new Book({
       title: "The Great Gatsby",
@@ -67,8 +64,7 @@ function addBookToLibrary() {
       read: false,
     }),
   );
-}
-addBookToLibrary();
+})();
 function displayBook() {
   container.innerHTML = "";
   myLibrary.forEach((book) => {
@@ -82,7 +78,6 @@ function displayBook() {
 
     const readBook = document.createElement("input");
     readBook.type = "checkbox";
-  
 
     title.textContent = `Title: ${book.title}`;
     author.textContent = `Author: ${book.author}`;
