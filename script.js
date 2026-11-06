@@ -5,7 +5,40 @@ const addBookBtn = document.querySelector(".addBookBtn");
 const closeBtn = document.querySelector(".closeBtn");
 const form = document.querySelector("form");
 const checkbox = document.querySelector(".checkbox");
+const title = document.getElementById("title");
+const titleError = document.querySelector(".titleError");
+const author = document.getElementById("author");
+const authorError = document.querySelector(".authorError");
 
+title.addEventListener("input", () => {
+  // it accepts a value of spaces
+  if (title.validity.valid) {
+    titleError.textContent = "";
+    titleError.className = "titleError error";
+  } else {
+    showTitleError();
+  }
+});
+function showTitleError() {
+  if (title.validity.valueMissing) {
+    titleError.textContent = "Title is required";
+  }
+  titleError.className = "titleError error active";
+}
+author.addEventListener("input", () => {
+  if (author.validity.valid) {
+    authorError.textContent = "";
+    authorError.className = "authorError error";
+  } else {
+    showAuthorError();
+  }
+});
+function showAuthorError() {
+  if (author.validity.valueMissing) {
+    authorError.textContent = "Author is required";
+  }
+  authorError.className = "authorError error active";
+}
 addBookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
@@ -15,8 +48,18 @@ closeBtn.addEventListener("click", () => {
 });
 
 form.addEventListener("submit", (event) => {
-  //add new book to myLibrary array
   event.preventDefault();
+
+  if (!title.validity.valid) {
+    // only runs if browser check fails
+    showTitleError();
+    return;
+  }
+  if (!author.validity.valid) {
+    showAuthorError();
+    return;
+  }
+  //add new book to myLibrary array
   const formData = new FormData(event.target);
   formData.set("read", checkbox.checked); //sets the checkbox value to either true or false
   const formValues = Object.fromEntries(formData);

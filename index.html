@@ -10,18 +10,33 @@
   <body>
     <dialog>
       <form action="" method="dialog" id="bookForm">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" autofocus required />
-        <label for="author">Author:</label>
+        <label for="title">
+          ><span>Title:</span>
+          <span class="titleError error" aria-live="polite"></span
+        ></label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          maxlength="32"
+          autofocus
+          required
+        />
+        <label for="author">
+          <span>Author:</span>
+          <span class="authorError error" aria-live="polite"></span>
+        </label>
         <input type="text" id="author" name="author" required />
-        <label for="pages">Number of pages:</label>
+        <label for="pages"
+          ><span>Number of pages:</span
+          ><span class="pagesError error" aria-live="polite"></span>
+        </label>
         <input
           type="number"
           min="1"
           oninput="this.value = this.value.replace(/[^0-9]/g, '')"
           name="pages"
           id="pages"
-          required
         />
         <label for="readStatus"
           >Has it been read?
